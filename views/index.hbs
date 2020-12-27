@@ -17,7 +17,7 @@
 </head>
 <script>
     function confirmxoa(name) {
-        let r = confirm('ban co muon xoa name k' + name + '?');
+        let r = confirm('do you want delete Product ' + name + '?');
 
         return r;
     }
@@ -44,6 +44,9 @@
             <th scope="col">NAME</th>
             <th scope="col">PRICE</th>
             <th scope="col">COLOR</th>
+            <th scope="col">Date</th>
+            <th scope="col">bill</th>
+
             <th scope="col">DELETE</th>
             <th scope="col">EDIT</th>
         </tr>
@@ -53,6 +56,8 @@
             <td >{{productName}} </td>
             <td>{{price}} </td>
             <td>{{color}} </td>
+            <td>{{importedDate}} </td>
+            <td>{{bill}} </td>
             <td><a href="/delete?id={{_id}}" onclick="return confirmxoa('{{productName}}')"> Delete </a></td>
             <td><a href="/Edit?id={{_id}}">Edit</a></td>
         </tr>

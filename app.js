@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 var url = 'mongodb+srv://phuc:112233445566@cluster0.jxuk1.mongodb.net/test';
 
+
 app.get('/', async(req, res) => {
     let client = await MongoClient.connect(url);
     let dbo = client.db("ProductDB2");
@@ -25,12 +26,13 @@ app.post('/doInsert', async(req, res) => {
     let nameInput = req.body.txtName;
     let priceInput = req.body.txtPrice;
     let colorInput = req.body.txtColor;
+    let date = req.body.txtDate;
+    let inputbill = req.body.txtBill;
 
     let client = await MongoClient.connect(url);
     let dbo = client.db("ProductDB2");
-    let newProduct = { productName: nameInput, price: priceInput, color: colorInput };
+    let newProduct = { productName: nameInput, price: priceInput, color: colorInput, importedDate: date, bill: inputbill };
     await dbo.collection("products").insertOne(newProduct)
-
     res.redirect('/');
 })
 app.get('/search', (req, res) => {
@@ -69,17 +71,17 @@ app.post('/doedit', async(req, res) => {
     let name = req.body.txtName;
     let priceInput = req.body.txtPrice;
     let inputcolor = req.body.txtColor;
-
-    let newValues = { $set: { productName: name, price: priceInput, color: inputcolor } };
+    let inputdate = req.body.txtDate;
+    let inputbill = req.body.txtBill;
+    let newValues = { $set: { productName: name, price: priceInput, color: inputcolor, importedDate: inputdate, bill: inputbill } };
     var ObjectID = require('mongodb').ObjectID;
     let condition = { "_id": ObjectID(id) };
 
     let client = await MongoClient.connect(url);
     let dbo = client.db("ProductDB2");
     await dbo.collection("products").updateOne(condition, newValues);
-
     res.redirect('/');
 })
-var PORT = process.env.PORT || 3000
-app.listen(PORT)
+
+app.listen(process.env.PORT || 3000)
 console.log("server is running")
