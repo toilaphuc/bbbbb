@@ -39,9 +39,20 @@
                 aria-describedby="basic-addon1" required="">
             <br>
             <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Product date</span>
+            </div>
+            <input type="date" name="txtDate" value="{{model.importedDate}}" class="form-control"
+                aria-describedby="basic-addon1" required="">
+            <br>
+            <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Product Color</span>
             </div>
             <input type="text" name="txtColor" value="{{model.color}}" class="form-control"
+                aria-describedby="basic-addon1" required="">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Product Bill</span>
+            </div>
+            <input type="number" name="txtBill" value="{{model.bill}}" class="form-control"
                 aria-describedby="basic-addon1" required="">
         </div>
         <input type="submit" value="Update">
